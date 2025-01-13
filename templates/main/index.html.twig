@@ -3,14 +3,13 @@
 {% block title %}Inicio - YenCraft{% endblock %}
 
 {% block content %}
-<h1 class="text-4xl font-bold text-center mt-6">Bienvenido a YenCraft</h1>
-<p class="text-lg text-gray-700 text-center mt-4">
-    Explora nuestras creaciones únicas en madera, diseñadas para inspirar y decorar.
-</p>
-<div class="mt-8 text-center">
-    <a href="{{ path('main_tienda') }}" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
-        Visita nuestra tienda
+<div class="container mx-auto p-6 text-center">
+    <h1 class="text-4xl font-bold text-green-600">Bienvenido a YenCraft</h1>
+    <p class="mt-4 text-gray-700">Explora nuestras creaciones únicas en madera.</p>
+    <a href="{{ path('main_tienda') }}" class="mt-6 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+        Ver Tienda
     </a>
 </div>
 {% endblock %}
+
 
