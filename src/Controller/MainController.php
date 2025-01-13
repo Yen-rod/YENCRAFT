@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'inicio')]
+    #[Route('/', name: 'main_index')]
     public function index(): Response
     {
         return $this->render('main/index.html.twig');
@@ -25,7 +25,7 @@ class MainController extends AbstractController
     ]);
 }
 
-    #[Route('/blog', name: 'blog')]
+    #[Route('/blog', name: 'main_blog')]
     public function blog(): Response
     {
         return $this->render('main/blog.html.twig');
