@@ -18,8 +18,9 @@ class MainController extends AbstractController
     #[Route('/tienda', name: 'main_tienda')]
     public function tienda(ProductoRepository $productoRepository): Response
 {
-    $productos = $productoRepository->findAll();
-
+    //productos desde la bd
+    $productos = $productoRepository->findAll(); 
+    //pasar los productos a la plantilla
     return $this->render('main/tienda.html.twig', [
         'productos' => $productos,
     ]);
@@ -28,7 +29,15 @@ class MainController extends AbstractController
     #[Route('/blog', name: 'main_blog')]
     public function blog(): Response
     {
-        return $this->render('main/blog.html.twig');
+        //Simular artículos del blog 
+        $posts = [
+            ['titulo' => 'Cómo cuidar tus muebles de madera', 'fecha' => '2025-01-10'],
+            ['titulo' => 'Decoración minimalista con madera', 'fecha' => '2025-01-12'],
+        ];
+
+        return $this->render('main/blog.html.twig', [
+            'posts' => $posts,
+        ]);
     }
 }
 
