@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear Producto{% endblock %}
+
+{% block content %}
+    <h1 class="text-3xl font-bold mb-6">Crear Nuevo Producto</h1>
+
+    {# Incluir el formulario desde _form.html.twig #}
+    {{ include('producto/_form.html.twig', {'button_label': 'Guardar'}) }}
+
+    {# Enlace para volver a la lista de productos #}
+    <a href="{{ path('app_producto_index') }}" class="text-blue-500 hover:underline mt-4 inline-block">
+        Volver a la lista
+    </a>
+{% endblock %}

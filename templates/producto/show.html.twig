@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalle del Producto{% endblock %}   {#DETALLE DE LOS PRODUCTOS#}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">Detalle del Producto</h1>
+
+<table class="table-auto w-full border-collapse border border-gray-200">
+    <tbody>
+        <tr>
+            <th class="border px-4 py-2">Id</th>
+            <td class="border px-4 py-2">{{ producto.id }}</td>
+        </tr>
+        <tr>
+            <th class="border px-4 py-2">Nombre</th>
+            <td class="border px-4 py-2">{{ producto.nombre }}</td>
+        </tr>
+        <tr>
+            <th class="border px-4 py-2">Descripción</th>
+            <td class="border px-4 py-2">{{ producto.descripcion }}</td>
+        </tr>
+        <tr>
+            <th class="border px-4 py-2">Precio</th>
+            <td class="border px-4 py-2">{{ producto.precio }} €</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mt-6">
+    <a href="{{ path('app_producto_index') }}" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">Volver</a>
+    <a href="{{ path('app_producto_edit', {'id': producto.id}) }}" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Editar</a>
+    {{ include('producto/_delete_form.html.twig') }}
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $('#productosTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                }
+            });
+        });
+    </script>
+    {{ parent() }}
+{% endblock %}

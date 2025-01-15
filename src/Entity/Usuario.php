@@ -78,11 +78,7 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        //garantiza que siempre haya la menos el rol ROLE_USER
-        $roles = $this->roles;
-        $roles[] = 'ROLE_USER';
-        //elimina valores duplicados en el array - Finalmente, se devuelve un array único con todos los roles del usuario.
-        return array_unique($roles);
+        return array_unique($this->roles); // Devuelve un array único sin duplicados
     }
 
     public function setRoles(array $roles): static

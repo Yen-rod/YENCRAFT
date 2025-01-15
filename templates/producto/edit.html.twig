@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Producto{% endblock %}
+
+{% block content %}
+    <h1 class="text-3xl font-bold mb-6">Editar Producto</h1>
+
+    {# Incluye el formulario reutilizable, con un botón personalizado #}
+    {{ include('producto/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    {# Enlace para volver a la lista de productos #}
+    <a href="{{ path('app_producto_index') }}" class="text-blue-500 hover:underline mt-4 inline-block">
+        Volver a la lista
+    </a>
+
+    {# Formulario para eliminar el producto actual, estilizado con TailwindCSS #}
+    <div class="mt-6">
+        {{ include('producto/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

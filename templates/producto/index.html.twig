@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestión de Productos{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">Gestión de Productos</h1>
+
+<table id="productosTable" class="table-auto w-full border-collapse border border-gray-200 mt-4">
+
+    <thead class="bg-gray-100"> {#encabezado tabla#}
+        <tr>
+            <th class="border px-4 py-2">Id</th>
+            <th class="border px-4 py-2">Nombre</th>
+            <th class="border px-4 py-2">Descripción</th>
+            <th class="border px-4 py-2">Precio</th>
+            <th class="border px-4 py-2">Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for producto in productos %}
+            <tr>
+                <td class="border px-4 py-2">{{ producto.id }}</td>
+                <td class="border px-4 py-2">{{ producto.nombre }}</td>
+                <td class="border px-4 py-2">{{ producto.descripcion }}</td>
+                <td class="border px-4 py-2">{{ producto.precio }} €</td>
+                <td class="border px-4 py-2">
+                    <a href="{{ path('app_producto_show', {'id': producto.id}) }}" class="text-blue-500 hover:underline">Ver</a>
+                    <a href="{{ path('app_producto_edit', {'id': producto.id}) }}" class="text-green-500 hover:underline">Editar</a>
+                    {{ include('producto/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+
+            <tr>
+                <td colspan="5" class="text-center py-4">No hay productos disponibles.</td>
+            </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+<a href="{{ path('app_producto_new') }}" class="mb-4 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+    Añadir Producto
+</a>
+
+{% endblock %} {# <-- Cierre del bloque content #}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $('#productosTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.2.1/i18n/es-ES.json'
+                }
+            });
+        });
+    </script>
+    {{ parent() }}
+{% endblock %}
