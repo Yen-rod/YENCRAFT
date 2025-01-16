@@ -22,7 +22,7 @@ class Pedido
     #[ORM\ManyToOne(inversedBy: 'pedidos')]
     private ?Usuario $usuario = null;
 
-    #[ORM\ManyToMany(targetEntity: Producto::class, inversedBy: 'pedidos')]
+    #[ORM\ManyToMany(targetEntity: Producto::class, inversedBy: 'pedidos', cascade:['persist'])]
     private Collection $productos;
 
     public function __construct()

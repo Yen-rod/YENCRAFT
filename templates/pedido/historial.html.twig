@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historial de Pedidos{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">Historial de Pedidos</h1>
+
+{% if pedidos|length > 0 %}
+<ul class="space-y-4">
+    {% for pedido in pedidos %}
+    <li class="border p-4 rounded shadow">
+        <p><strong>Fecha:</strong> {{ pedido.fecha|date('d/m/Y H:i') }}</p>
+        <p><strong>Productos:</strong></p>
+        <ul class="ml-4 list-disc">
+            {% for producto in pedido.productos %}
+            <li>{{ producto.nombre }} - {{ producto.precio }} €</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay pedidos registrados.</p>
+{% endif %}
+{% endblock %}
