@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-#[Route('/producto')]
+#[Route('/producto')] //template
 #[IsGranted('ROLE_ADMIN')] //Restringir acceso sólo a rol_admin
 class ProductoController extends AbstractController
 {

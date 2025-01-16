@@ -6,9 +6,9 @@
         <h2 class="text-xl font-semibold">{{ producto.nombre }}</h2>
         <p class="text-gray-600">Precio: {{ producto.precio }} €</p>
         <p class="text-gray-500">Categoría: {{ producto.categoria.nombre }}</p>
-        <button class="mt-2 bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600">
-            Comprar
-        </button>
+        <a href="{{ path('app_carrito_add', {'id': producto.id}) }}" class="mt-2 bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600 inline-block">
+        Agregar al carrito
+        </a>
     </div>
     {% else %}
     <p>No hay productos disponibles.</p>
