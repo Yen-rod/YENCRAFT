@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,6 +36,14 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $activo = true;
+
+    #[ORM\OneToMany(targetEntity: Pedido::class, mappedBy: 'usuario')]
+    private Collection $pedidos;
+
+    public function __construct()
+    {
+        $this->pedidos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -121,5 +131,35 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->email;
+    }
+
+    /**
+     * @return Collection<int, Pedido>
+     */
+    public function getPedidos(): Collection
+    {
+        return $this->pedidos;
+    }
+
+    public function addPedido(Pedido $pedido): static
+    {
+        if (!$this->pedidos->contains($pedido)) {
+            $this->pedidos->add($pedido);
+            $pedido->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removePedido(Pedido $pedido): static
+    {
+        if ($this->pedidos->removeElement($pedido)) {
+            // set the owning side to null (unless already changed)
+            if ($pedido->getUsuario() === $this) {
+                $pedido->setUsuario(null);
+            }
+        }
+
+        return $this;
     }
 }

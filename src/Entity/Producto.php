@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,14 @@ class Producto
 
     #[ORM\ManyToOne]
     private ?Categoria $categoria = null;
+
+    #[ORM\ManyToMany(targetEntity: Pedido::class, mappedBy: 'productos')]
+    private Collection $pedidos;
+
+    public function __construct()
+    {
+        $this->pedidos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +100,33 @@ class Producto
     public function setCategoria(?Categoria $categoria): static
     {
         $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pedido>
+     */
+    public function getPedidos(): Collection
+    {
+        return $this->pedidos;
+    }
+
+    public function addPedido(Pedido $pedido): static
+    {
+        if (!$this->pedidos->contains($pedido)) {
+            $this->pedidos->add($pedido);
+            $pedido->addProducto($this);
+        }
+
+        return $this;
+    }
+
+    public function removePedido(Pedido $pedido): static
+    {
+        if ($this->pedidos->removeElement($pedido)) {
+            $pedido->removeProducto($this);
+        }
 
         return $this;
     }
