@@ -20,18 +20,20 @@ class AppFixtures extends Fixture
         $categoria2->setNombre('Cuadros');
         $manager->persist($categoria2);
 
-        // Crear productos
-        $producto1 = new Producto();
-        $producto1->setNombre('Lámpara de Madera');
-        $producto1->setPrecio(45.99);
-        $producto1->setCategoria($categoria1); // Relación con la categoría
-        $manager->persist($producto1);
+       // Crear productos
+       $producto1 = new Producto();
+       $producto1->setNombre('Lámpara de Madera');
+       $producto1->setPrecio(45.99);
+       $producto1->setCategoria($categoria1); // Relación con la categoría
+       $producto1->setImagen('uploads/images/productos/lampara_madera.jpg'); // Asignar una imagen
+       $manager->persist($producto1);
 
-        $producto2 = new Producto();
-        $producto2->setNombre('Cuadro de Roble');
-        $producto2->setPrecio(75.50);
-        $producto2->setCategoria($categoria2); // Relación con la categoría
-        $manager->persist($producto2);
+       $producto2 = new Producto();
+       $producto2->setNombre('Cuadro de Roble');
+       $producto2->setPrecio(75.50);
+       $producto2->setCategoria($categoria2); // Relación con la categoría
+       $producto2->setImagen('uploads/images/productos/cuadro_roble.jpg'); // Asignar una imagen
+       $manager->persist($producto2);
 
         $manager->flush();
     }

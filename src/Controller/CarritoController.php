@@ -57,19 +57,35 @@ class CarritoController extends AbstractController
     $carrito = $session->get('carrito', []);
 
     // Si el carrito está vacío, redirigir con un mensaje
-    if (empty($carrito)) {
+    if (empty($carrito)) {  //true si la variable carrito está vacia 
         $this->addFlash('error', 'El carrito está vacío.');
-        return $this->redirectToRoute('app_carrito_index');
+        return $this->redirectToRoute('app_carrito_index'); 
     }
 
     // Crear un nuevo pedido
     $pedido = new Pedido();
     $pedido->setFecha(new \DateTime());
-    $pedido->setUsuario($this->getUser()); // Asignar el usuario autenticado
+
+    // Validar que el usuario está autenticado
+    if (!$this->getUser()) {
+        $this->addFlash('error', 'Debes iniciar sesión para confirmar un pedido.');
+        return $this->redirectToRoute('app_login'); // Redirigir a la página de login
+    }
+
+    $pedido->setUsuario($this->getUser()); // Asociar el pedido con el usuario autenticado
 
     // Asociar productos al pedido
     foreach ($carrito as $item) {
-        $pedido->addProducto($item['producto']);
+        // Cargar el producto desde el repositorio para garantizar que está completamente inicializado
+        $producto = $entityManager->getRepository(Producto::class)->find($item['producto']->getId());
+    
+        // Verificar si el producto existe en la base de datos
+        if (!$producto) {
+            $this->addFlash('error', 'El producto no existe.');
+            return $this->redirectToRoute('app_carrito_index');
+        }
+    
+        $pedido->addProducto($producto);
     }
 
     // Guardar el pedido en la base de datos

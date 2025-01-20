@@ -28,8 +28,10 @@ class Producto
     #[ORM\Column(length: 255)]
     private ?string $imagen = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: Categoria::class)]
+    #[ORM\JoinColumn(nullable: false)]  //JoinColum para evitar que se permita un producto sin categoría.
     private ?Categoria $categoria = null;
+    
 
     #[ORM\ManyToMany(targetEntity: Pedido::class, mappedBy: 'productos')]
     private Collection $pedidos;
