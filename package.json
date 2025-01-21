@@ -1,0 +1,25 @@
+{
+  "name": "yencraft",
+  "version": "1.0.0",
+  "description": "YenCraft es una plataforma web para la venta de productos artesanales en madera 🪵 y la publicación de artículos en un blog ✍️. Desarrollada con Symfony y MySQL, la plataforma ofrece una tienda en línea con un diseño moderno y minimalista, además de una sección de blog para enriquecer la experiencia del usuario.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yen-rod/yenCraft.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yen-rod/yenCraft/issues"
+  },
+  "homepage": "https://github.com/Yen-rod/yenCraft#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^3.4.17"
+  }
+}
