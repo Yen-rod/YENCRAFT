@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}YenCraft{% endblock %}</title>
     
-    {% block styles %}  {# Tailwindcss CDN para todas las páginas que extiendan de base.html.twig #} 
-        <script src="https://cdn.tailwindcss.com"></script>
-            {# archivos CSS y JS de DataTables  #} 
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css">
-        <script src="https://code.jquery.com/jquery-3.7.1.js"></script> {# jQuery primero que js#}
-        <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
-    
-    {% endblock %}
+    {% block styles %}
+        {# Incluye el archivo generado por TailwindCSS #}
+        <link rel="stylesheet" href="{{ asset('styles/output.css') }}">
 
+        {# Estilos de DataTables #}
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css">
+    {% endblock %}
 </head>
 <body>
     <header class="bg-gray-800 text-white">
@@ -28,6 +26,10 @@
     <main>
         {% block content %}{% endblock %}
     </main>
-    {% block scripts %}{% endblock %}
+
+    {% block scripts %}
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    {% endblock %}
 </body>
 </html>
