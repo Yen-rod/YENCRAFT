@@ -12,8 +12,8 @@
         <p><strong>Fecha:</strong> {{ pedido.fecha|date('d/m/Y H:i') }}</p>
         <p><strong>Productos:</strong></p>
         <ul class="ml-4 list-disc">
-            {% for producto in pedido.productos %}
-            <li>{{ producto.nombre }} - {{ producto.precio }} €</li>
+            {% for pedidoProducto  in pedido.pedidoProductos %}
+            <li>{{ pedidoProducto.producto.nombre }} - {{ pedidoProducto.producto.precio }} €</li>
             {% endfor %}
         </ul>
     </li>
