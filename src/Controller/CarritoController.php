@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Producto;
 use App\Entity\Pedido;
+use App\Entity\PedidoProducto;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+
+
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -85,7 +87,10 @@ class CarritoController extends AbstractController
             return $this->redirectToRoute('app_carrito_index');
         }
     
-        $pedido->addProducto($producto);
+        $pedidoProducto = new PedidoProducto();
+        $pedidoProducto->setProducto($producto);
+        $pedidoProducto->setCantidad($item['cantidad']);
+        $pedido->addPedidoProducto($pedidoProducto);
     }
 
     // Guardar el pedido en la base de datos

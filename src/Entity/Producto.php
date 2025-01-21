@@ -33,12 +33,16 @@ class Producto
     private ?Categoria $categoria = null;
     
 
-    #[ORM\ManyToMany(targetEntity: Pedido::class, mappedBy: 'productos')]
-    private Collection $pedidos;
+    //#[ORM\ManyToMany(targetEntity: Pedido::class, mappedBy: 'productos')]
+    //private Collection $pedidos;
+
+    #[ORM\OneToMany(mappedBy: 'producto', targetEntity: PedidoProducto::class)]
+    private Collection $pedidoProductos;
 
     public function __construct()
     {
-        $this->pedidos = new ArrayCollection();
+        //$this->pedidos = new ArrayCollection();
+        $this->pedidoProductos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,29 +113,60 @@ class Producto
     /**
      * @return Collection<int, Pedido>
      */
-    public function getPedidos(): Collection
+    //public function getPedidos(): Collection
+   // {
+    //    return $this->pedidos;
+    //}
+
+    //public function addPedido(Pedido $pedido): static
+    //{
+   //     if (!$this->pedidos->contains($pedido)) {
+    //        $this->pedidos->add($pedido);
+    //        $pedido->addProducto($this);
+     //   }
+
+    //    return $this;
+    //}
+
+    //public function removePedido(Pedido $pedido): static
+    //{
+     //   if ($this->pedidos->removeElement($pedido)) {
+     //       $pedido->removeProducto($this);
+     //   }
+
+    //    return $this;
+   // }
+
+   /**
+     * @return Collection<int, PedidoProducto>
+     */
+    public function getPedidoProductos(): Collection
     {
-        return $this->pedidos;
+        return $this->pedidoProductos;
     }
 
-    public function addPedido(Pedido $pedido): static
+    public function addPedidoProducto(PedidoProducto $pedidoProducto): self
     {
-        if (!$this->pedidos->contains($pedido)) {
-            $this->pedidos->add($pedido);
-            $pedido->addProducto($this);
+        if (!$this->pedidoProductos->contains($pedidoProducto)) {
+            $this->pedidoProductos[] = $pedidoProducto;
+            $pedidoProducto->setProducto($this);
         }
 
         return $this;
     }
 
-    public function removePedido(Pedido $pedido): static
+    public function removePedidoProducto(PedidoProducto $pedidoProducto): self
     {
-        if ($this->pedidos->removeElement($pedido)) {
-            $pedido->removeProducto($this);
+        if ($this->pedidoProductos->removeElement($pedidoProducto)) {
+            // Set the owning side to null (unless already changed)
+            if ($pedidoProducto->getProducto() === $this) {
+                $pedidoProducto->setProducto(null);
+            }
         }
 
         return $this;
     }
+
 
     public function __toString(): string
     {
