@@ -3,18 +3,33 @@
 {% block title %}Blog - YenCraft{% endblock %}
 
 {% block content %}
-<h1 class="text-3xl font-bold mt-6 mb-4">Artículos del Blog</h1>
-<div class="space-y-6">
-    {% for post in posts %}
-    <div class="border-b pb-4">
-        <h2 class="text-2xl font-semibold">{{ post.titulo }}</h2>
-        <p class="text-gray-500 text-sm">Publicado el {{ post.fecha }}</p>
-        <p class="mt-2 text-gray-700">
-            Descubre más sobre {{ post.titulo | lower }}.
-        </p>
-        <a href="#" class="text-green-500 hover:text-green-700">Leer más</a>
+<!-- Contenedor principal con padding y centrado -->
+<div class="max-w-4xl mx-auto p-4">
+    <!-- Título principal estilizado -->
+    <h1 class="text-4xl font-extrabold text-gray-900 mt-6 mb-8 text-center">
+        Artículos del Blog
+    </h1>
+
+    <!-- Espaciado entre artículos -->
+    <div class="space-y-8">
+        {% for post in posts %}
+        <!-- Card para cada artículo -->
+        <div class="bg-white shadow-lg rounded-lg p-6 transition transform hover:scale-105 hover:shadow-2xl">
+            <!-- Título del artículo -->
+            <h2 class="text-2xl font-bold text-gray-800">{{ post.titulo }}</h2>
+            <!-- Fecha de publicación con texto secundario -->
+            <p class="text-sm text-gray-500 mt-1">Publicado el {{ post.fecha }}</p>
+            <!-- Resumen del artículo -->
+            <p class="mt-4 text-gray-700 leading-relaxed">
+                Descubre más sobre {{ post.titulo | lower }}.
+            </p>
+            <!-- Botón "Leer más" estilizado -->
+            <a href="#" class="inline-block mt-4 text-green-600 font-medium hover:text-green-800">
+                Leer más →
+            </a>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}
 
