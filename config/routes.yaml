@@ -1,5 +1,12 @@
+# Importar controladores con rutas basadas en atributos
 controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+    resource: ../src/Controller/
     type: attribute
+
+# Definir rutas adicionales directamente
+error_404:
+    path: /error/404
+    controller: App\Controller\ErrorController::show404
+
+
+    
